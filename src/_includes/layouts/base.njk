@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ description or site.description }}">
+  <title>{% if title %}{{ title }} · {% endif %}{{ site.title }}</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,400;0,600;1,400&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="/feed.xml">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="site-brand">
+        <a href="/" class="brand-link">
+          <span class="brand-icon">☕</span>
+          <div class="brand-text">
+            <span class="brand-name">The Coffee Can Camp</span>
+            <span class="brand-tagline">Gear advice. Trail stories. Hard-won opinions.</span>
+          </div>
+        </a>
+      </div>
+      <nav class="site-nav">
+        {% for item in site.nav %}
+          <a href="{{ item.url }}" class="nav-link {% if page.url == item.url %}active{% endif %}">{{ item.text }}</a>
+        {% endfor %}
+      </nav>
+      <button class="nav-toggle" aria-label="Toggle navigation">☰</button>
+    </div>
+  </header>
+
+  <main class="site-main">
+    {{ content | safe }}
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="brand-icon">☕</span>
+        <span>The Coffee Can Camp</span>
+      </div>
+      <p class="footer-bio">{{ site.author.bio }}</p>
+      <div class="footer-links">
+        <a href="/about/">About</a>
+        <a href="/stories/">Stories</a>
+        <a href="/gear/">Gear</a>
+        <a href="/feed.xml">RSS</a>
+      </div>
+      <p class="footer-copy">© {{ site.currentYear }} TheCoffeeCanCamp.com · Built on campfire logic and hard experience.<br>
+      <small>Some links are affiliate links. I only recommend gear I'd actually carry.</small></p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    const toggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('.site-nav');
+    if (toggle) {
+      toggle.addEventListener('click', () => nav.classList.toggle('open'));
+    }
+  </script>
+
+</body>
+</html>

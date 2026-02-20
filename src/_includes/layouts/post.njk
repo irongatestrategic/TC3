@@ -1,0 +1,51 @@
+---
+layout: layouts/base.njk
+---
+
+<article class="post">
+  <header class="post-header">
+    <div class="post-meta-top">
+      {% if tags %}
+        {% for tag in tags %}
+          {% if tag != "post" and tag != "posts" %}
+            <a href="/tags/{{ tag }}/" class="post-tag">{{ tag }}</a>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    </div>
+    <h1 class="post-title">{{ title }}</h1>
+    {% if description %}
+      <p class="post-description">{{ description }}</p>
+    {% endif %}
+    <div class="post-meta">
+      <time datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate }}</time>
+      {% if readTime %}
+        <span class="read-time">· {{ readTime }} min read</span>
+      {% endif %}
+    </div>
+  </header>
+
+  {% if image %}
+    <div class="post-hero">
+      <img src="{{ image }}" alt="{{ imageAlt or title }}" loading="lazy">
+    </div>
+  {% endif %}
+
+  <div class="post-body">
+    {{ content | safe }}
+  </div>
+
+  <footer class="post-footer">
+    <div class="author-card">
+      <div class="author-icon">☕</div>
+      <div class="author-info">
+        <strong>Written by Jeff</strong>
+        <p>{{ site.author.bio }}</p>
+      </div>
+    </div>
+
+    <div class="post-nav">
+      <a href="/stories/" class="back-link">← All Stories</a>
+    </div>
+  </footer>
+</article>

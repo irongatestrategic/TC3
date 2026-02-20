@@ -1,0 +1,94 @@
+---
+layout: layouts/base.njk
+title: Home
+description: Gear advice from someone who learned the hard way. Trail stories from a farm kid who figured it out himself.
+---
+
+<section class="home-hero">
+  <p class="hero-eyebrow">Est. 2026 · Mississippi · Hard-won opinions</p>
+  <h1 class="hero-title">
+    Gear advice from someone who <em>learned the hard way.</em>
+  </h1>
+  <p class="hero-body">
+    No sponsored content. No gear I haven't thought hard about.
+    Just stories from the trail — and what I'd carry today instead of what I carried then.
+  </p>
+  <a href="/stories/" class="hero-cta">Read the Stories →</a>
+</section>
+
+<div class="origin-strip">
+  <p>
+    <strong>The origin story:</strong> A church trip leader once handed me a cast iron skillet to carry into the backcountry.
+    I swore I'd never let anyone pick my gear again. This site is what happened next.
+  </p>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <h2 class="section-title">Latest from the camp</h2>
+    <a href="/stories/" class="section-link">All stories →</a>
+  </div>
+
+  {% set postslist = collections.posts %}
+  {% if postslist.length %}
+
+    {# Featured post - most recent #}
+    {% set featured = postslist[0] %}
+    <div class="post-featured">
+      <div>
+        <div class="post-card-tags">
+          {% for tag in featured.data.tags %}
+            {% if tag != "post" and tag != "posts" %}
+              <span class="post-card-tag">{{ tag }}</span>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <h3 class="post-card-title">
+          <a href="{{ featured.url }}">{{ featured.data.title }}</a>
+        </h3>
+        {% if featured.data.description %}
+          <p class="post-card-excerpt">{{ featured.data.description }}</p>
+        {% endif %}
+        <div class="post-card-meta">
+          <time>{{ featured.date | readableDate }}</time>
+        </div>
+      </div>
+      <span class="featured-label">Latest</span>
+    </div>
+
+    {# Rest of posts #}
+    {% if postslist.length > 1 %}
+      <div class="post-grid">
+        {% for post in postslist | head(4) %}
+          {% if loop.index > 1 %}
+            <article class="post-card">
+              <div class="post-card-body">
+                <div class="post-card-tags">
+                  {% for tag in post.data.tags %}
+                    {% if tag != "post" and tag != "posts" %}
+                      <span class="post-card-tag">{{ tag }}</span>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+                <h3 class="post-card-title">
+                  <a href="{{ post.url }}">{{ post.data.title }}</a>
+                </h3>
+                {% if post.data.description %}
+                  <p class="post-card-excerpt">{{ post.data.description }}</p>
+                {% endif %}
+                <div class="post-card-meta">
+                  <time>{{ post.date | readableDate }}</time>
+                </div>
+              </div>
+            </article>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+
+  {% else %}
+    <p style="font-family: var(--font-mono); color: var(--smoke); font-style: italic; font-size: 0.85rem;">
+      Stories coming soon. The campfire's just getting started.
+    </p>
+  {% endif %}
+</div>

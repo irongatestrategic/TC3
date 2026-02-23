@@ -1,6 +1,7 @@
 ---
 layout: layouts/page.njk
 title: Gear
+permalink: /gear/
 description: What I'd carry today. Based on what I carried then — and what that cost me.
 ---
 

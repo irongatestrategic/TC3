@@ -1,6 +1,7 @@
 ---
 layout: layouts/page.njk
 title: About
+permalink: /about/
 description: The cast iron skillet story. And everything that came after it.
 ---
 
